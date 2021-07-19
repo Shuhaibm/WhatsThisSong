@@ -80,8 +80,6 @@ function AudD_Call(audio) {
 
     xhr.send(data);
 
-
-
 }
 
 

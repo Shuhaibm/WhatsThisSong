@@ -20,7 +20,6 @@ function get_audio() {
 
             let allAudio = [];
 
-
             // let state = document.getElementById("button_logo")
             // let paused = "fas fa-forward forward_icon"
             // let listening = "fas fa-pause pause_icon"
@@ -39,9 +38,9 @@ function get_audio() {
 
 
             mediaRecorder.addEventListener("stop", () => {
-                const finalAudio = new Blob(allAudio, { 'type': 'audio/mp4;' });
-                const audioUrl = URL.createObjectURL(finalAudio);
-                console.log(audioUrl);
+                var finalAudio = new Blob(allAudio, { 'type': 'audio/wav' });
+                var audioUrl = URL.createObjectURL(finalAudio);
+
 
                 audioElem = document.getElementById("audio");
                 audioElem.src = audioUrl;
@@ -52,38 +51,34 @@ function get_audio() {
                 pause()
 
                 //Call API from here
-                AudD_Call(audioUrl)
+                AudD_Call(finalAudio)
             });
 
             setTimeout(() => {
                 mediaRecorder.stop();
-            }, 5000); //FIND GOOD TIME TO USE
+            }, 10000); //FIND GOOD TIME TO USE
         });
 }
 
-function AudD_Call(audioUrl) {
+function AudD_Call(audio) {
 
-    var data = {
-        'api_token': '0407c995d24d78e57e6f7b80a48606bd',
-        'url': audioUrl,
-        'return': 'apple_music,spotify',
-    };
+    const data = new FormData();
+    data.append("file", audio);
 
-    console.log(audioUrl)
+    const xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
 
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+            console.log(this.responseText);
+        }
+    });
 
+    xhr.open("POST", "https://shazam-core.p.rapidapi.com/v1/tracks/recognize");
+    xhr.setRequestHeader("x-rapidapi-key", "eaaea44986mshb7435c2f9d09958p1d81e1jsn2b682f492140");
+    xhr.setRequestHeader("x-rapidapi-host", "shazam-core.p.rapidapi.com");
 
-    // var request = new XMLHttpRequest();
-
-    // request.open('POST', "https://api.audd.io/", data);
-
-    // request.send()
-
-    // request.onload = () => {
-
-    //     console.log(request.response);
-    // }
-
+    xhr.send(data);
 
 
 
@@ -101,8 +96,6 @@ function pause() {
 
     state.className = paused
     document.getElementById("listen").innerHTML = "Start Listening"
-
-
 }
 
 function listen() {

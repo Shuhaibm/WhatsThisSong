@@ -6,7 +6,7 @@ function on_click() {
     if (state.className === paused) {
         listen()
     } else if (state.className === listening) {
-        //pause()
+        //do nothing for now... pause()
     }
 }
 
@@ -41,17 +41,14 @@ function get_audio() {
                 var finalAudio = new Blob(allAudio, { 'type': 'audio/wav' });
                 var audioUrl = URL.createObjectURL(finalAudio);
 
-
-                audioElem = document.getElementById("audio");
-                audioElem.src = audioUrl;
-
                 const audio = new Audio(audioUrl);
 
                 audio.play();
                 pause()
 
                 //Call API from here
-                AudD_Call(finalAudio)
+                Api_Call(finalAudio)
+
             });
 
             setTimeout(() => {
@@ -60,7 +57,7 @@ function get_audio() {
         });
 }
 
-function AudD_Call(audio) {
+function Api_Call(audio) {
 
     const data = new FormData();
     data.append("file", audio);
@@ -71,6 +68,7 @@ function AudD_Call(audio) {
     xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
             console.log(this.responseText);
+            processJson(JSON.parse(this.responseText))
         }
     });
 
@@ -79,7 +77,6 @@ function AudD_Call(audio) {
     xhr.setRequestHeader("x-rapidapi-host", "shazam-core.p.rapidapi.com");
 
     xhr.send(data);
-
 }
 
 
@@ -105,4 +102,15 @@ function listen() {
 
     get_audio()
 
+}
+
+
+
+function processJson(jsonInput) {
+    let songTitle = jsonInput.track.title;
+    let appleMusicURL = jsonInput.track.hub.options.actions.uri;
+    let subtitle = jsonInput.track.subtitle;
+    let spotifyLink = track.hub.providers.actions.uri
+
+    console.log("Your song is" + jsonInput.track.title + " , by" + subtitle)
 }

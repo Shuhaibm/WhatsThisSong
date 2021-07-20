@@ -3,10 +3,10 @@ function on_click() {
     let paused = "fas fa-forward forward_icon"
     let listening = "fas fa-pause pause_icon"
 
+    loading()
+
     if (state.className === paused) {
         listen()
-    } else if (state.className === listening) {
-        //do nothing for now... pause()
     }
 }
 
@@ -20,18 +20,6 @@ function get_audio() {
 
             let allAudio = [];
 
-            // let state = document.getElementById("button_logo")
-            // let paused = "fas fa-forward forward_icon"
-            // let listening = "fas fa-pause pause_icon"
-
-            // button.addEventListener("click", (ev) => {
-            //     if (state.className === paused) {
-            //         mediaRecorder.start()
-            //     } else if (state.className === listening) {
-            //         mediaRecorder.stop()
-            //     }
-            // })
-
             mediaRecorder.addEventListener("dataavailable", event => {
                 allAudio.push(event.data);
             });
@@ -44,16 +32,17 @@ function get_audio() {
                 const audio = new Audio(audioUrl);
 
                 audio.play();
-                pause()
-
+                pause();
+                //loading()   
                 //Call API from here
-                Api_Call(finalAudio)
-
+                //result = Api_Call(finalAudio) UPDATE
+                // showResults(JSON.parse(result)); UPDATE
+                showResults("s")
             });
 
             setTimeout(() => {
                 mediaRecorder.stop();
-            }, 10000); //FIND GOOD TIME TO USE
+            }, 1000); //FIND GOOD TIME TO USE UPDATE
         });
 }
 
@@ -67,8 +56,7 @@ function Api_Call(audio) {
 
     xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
-            console.log(this.responseText);
-            processJson(JSON.parse(this.responseText))
+            return this.responseText;
         }
     });
 
@@ -89,15 +77,20 @@ function pause() {
     let state = document.getElementById("button_logo")
     let paused = "fas fa-forward forward_icon"
 
+    document.getElementById("button").style.display = 'inline';
+    document.getElementById("loading").style.display = 'none';
+
     state.className = paused
     document.getElementById("listen").innerHTML = "Start Listening"
+
 }
 
 function listen() {
-    let state = document.getElementById("button_logo")
-    let listening = "fas fa-pause pause_icon"
 
-    state.className = listening
+    let state = document.getElementById("button_logo")
+    //let listening = "fas fa-pause pause_icon"
+
+    //state.className = listening
     document.getElementById("listen").innerHTML = "Listening . . ."
 
     get_audio()
@@ -106,11 +99,37 @@ function listen() {
 
 
 
-function processJson(jsonInput) {
-    let songTitle = jsonInput.track.title;
-    let appleMusicURL = jsonInput.track.hub.options.actions.uri;
-    let subtitle = jsonInput.track.subtitle;
-    let spotifyLink = track.hub.providers.actions.uri
+function showResults(jsonInput) {
+    // let songTitle = jsonInput.track.title;
+    // let appleMusicURL = jsonInput.track.hub.options.actions.uri;
+    // let subtitle = jsonInput.track.subtitle;
+    // let spotifyLink = track.hub.providers.actions.uri
 
-    console.log("Your song is" + jsonInput.track.title + " , by" + subtitle)
+    document.getElementById("container").style.display = 'none';
+    document.getElementById("result").style.display = 'inline';
+
+
+    let songTitle = "2040";
+    let subtitle = "le bebe";
+    let appleLink = "https://music.apple.com/gb/album/2040/1569712089?i=1569712093&ign-itscg=30201&ign-itsct=Shazam_ios&mttn3pid=a_custom_779816081798873874&mttnagencyid=769459046716559743&mttnsiteid=125115&mttnsub1=Shazam_ios&mttnsub2=5348615A-616D-3235-3830-44754D6D5973";
+    let spotifyLink = "spotify:search:Voice%20of%20the%20Heroes%20Lil%20Baby"
+
+
+    document.getElementById("songname2").innerHTML = songTitle;
+    document.getElementById("subtitle").innerHTML = "By " + subtitle;
+    //add links
+    document.getElementById("button_spotify").onclick = function () {
+        location.href = spotifyLink;
+    };
+    document.getElementById("button_apple").onclick = function () {
+        location.href = appleLink;
+    };
+}
+
+
+
+
+function loading() {
+    document.getElementById("button").style.display = 'none';
+    document.getElementById("loading").style.display = 'inline';
 }

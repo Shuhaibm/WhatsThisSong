@@ -107,9 +107,10 @@ function showResults(jsonInput) {
 
     let songTitle = jsonInput.track.title;
     let subtitle = jsonInput.track.subtitle;
-    //let appleLink = jsonInput.track.hub.options.actions.uri;
-    //let spotifyLink = jsonInput.track.hub.providers.actions.uri
+    let appleLink = jsonInput.track.apple_music_url;
+    let spotifyLink = jsonInput.track.hub.providers[0].actions[0].uri;
 
+    console.log(appleLink)
     // let songTitle = "2040";
     // let subtitle = "le bebe";
     // let appleLink = "https://music.apple.com/gb/album/2040/1569712089?i=1569712093&ign-itscg=30201&ign-itsct=Shazam_ios&mttn3pid=a_custom_779816081798873874&mttnagencyid=769459046716559743&mttnsiteid=125115&mttnsub1=Shazam_ios&mttnsub2=5348615A-616D-3235-3830-44754D6D5973";

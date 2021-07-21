@@ -138,7 +138,6 @@ html, body {
 .musicbutton {
   
   border: none;
-
   width:100%;
   overflow: hidden; 
   padding: 10pxs;
@@ -149,10 +148,20 @@ html, body {
   justify-content: center;
 
   cursor: pointer;
+
+  background-color: #734b6d;
 }
 .spotify{
   background-color:#3d15b0;
 }
 .apple{
   background-color:#bb99ff ;
+}
+.another{
+  height:100px;
+
+  font-weight: 500;
+  font-size: max(24px,2vw);
+  font-family: "Gill Sans", sans-serif;
+  color:white;
 }

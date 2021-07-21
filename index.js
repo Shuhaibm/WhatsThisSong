@@ -26,7 +26,7 @@ async function get_audio() {
 
                 const audio = new Audio(audioUrl);
 
-                audio.play();
+                //audio.play();
                 pause();
 
                 Api_Call(finalAudio);

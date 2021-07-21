@@ -13,7 +13,6 @@ html, body {
   flex-direction: column;
 }
 
-
 .button {
   
     background-color:  #cd84f1;
@@ -33,12 +32,9 @@ html, body {
     cursor: pointer;
 }
       
-
 .button:hover { 
     background: #ce92ec; 
 }
-
-
 
 .forward_icon {
   font-size: 10vw;
@@ -61,15 +57,12 @@ html, body {
     
 }
 
-
 .listen{
   font-weight: 650;
   font-size: max(24px,2vw);
   font-family: "Gill Sans", sans-serif;
   color: white;
 }
-
-
 
 .result {
 
@@ -81,7 +74,6 @@ html, body {
   justify-content: center;
 
   position: relative;
-
 
   flex-direction: column;
 
@@ -141,8 +133,7 @@ html, body {
   width:100%;
   overflow: hidden; 
   padding: 10pxs;
-   
-
+  
   display: flex;
   align-items: center;
   justify-content: center;

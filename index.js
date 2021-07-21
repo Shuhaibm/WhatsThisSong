@@ -8,8 +8,6 @@ function on_click() {
     }
 }
 
-
-
 async function get_audio() {
     navigator.mediaDevices.getUserMedia({ audio: true })
         .then(stream => {
@@ -88,8 +86,6 @@ function listen() {
 
 }
 
-
-
 function showResults(jsonInput) {
     document.getElementById("container").style.display = 'none';
     document.getElementById("result").style.display = 'inline';
@@ -109,7 +105,6 @@ function showResults(jsonInput) {
         location.href = appleLink;
     };
 }
-
 
 function loading() {
     document.getElementById("button").style.display = 'none';

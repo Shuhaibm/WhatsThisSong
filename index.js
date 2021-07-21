@@ -31,8 +31,7 @@ async function get_audio() {
                 audio.play();
                 pause();
 
-                //Api_Call(finalAudio);
-                showResults() //UPDATE
+                Api_Call(finalAudio);
             });
 
             setTimeout(() => {

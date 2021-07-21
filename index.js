@@ -34,7 +34,7 @@ async function get_audio() {
 
             setTimeout(() => {
                 mediaRecorder.stop();
-            }, 100);
+            }, 10000);
         });
 }
 

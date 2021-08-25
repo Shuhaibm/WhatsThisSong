@@ -74,6 +74,17 @@ function pause() {
 
 }
 
+function pause() {
+    let state = document.getElementById("button_logo")
+    let paused = "fas fa-forward forward_icon"
+
+    //  document.getElementById("button").style.display = 'inline';
+    //    document.getElementById("loading").style.display = 'none';
+
+    document.getElementById("listen").innerHTML = "Analyzing..."
+
+}
+
 function listen() {
 
     let state = document.getElementById("button_logo")

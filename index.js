@@ -81,7 +81,7 @@ function analyzing() {
     //  document.getElementById("button").style.display = 'inline';
     //    document.getElementById("loading").style.display = 'none';
 
-    document.getElementById("listen").innerHTML = "Analyzing..."
+    document.getElementById("listen").innerHTML = "Analyzing . . ."
 
 }
 

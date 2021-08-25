@@ -27,7 +27,7 @@ async function get_audio() {
                 const audio = new Audio(audioUrl);
 
                 //audio.play();
-                pause();
+                analyzing();
 
                 Api_Call(finalAudio);
             });
@@ -74,7 +74,7 @@ function pause() {
 
 }
 
-function pause() {
+function analyzing() {
     let state = document.getElementById("button_logo")
     let paused = "fas fa-forward forward_icon"
 
